@@ -14,7 +14,7 @@ type JWT struct {
 
 func NewJWT() *JWT {
 	return &JWT{
-		[]byte("asdq0912xw22"),
+		[]byte(utils.SECRET),
 	}
 }
 

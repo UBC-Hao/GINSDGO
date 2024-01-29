@@ -23,18 +23,8 @@ type SDGOUser struct{
 	//Special int
 	BP    uint32
 	GP    uint32
-	//Item  uint32
-	//Shou int
-	//PVE int
-	//Tag   int
-	//Sess  uint8
 	Slot  uint32
-	//Adjutant int   `json:"adjutant,omitempty"`
-	//Key      HexByte     `json:"key"`
-	//FList    *FriendList `json:"friend,omitempty"`
 	Grid     *Grid       `json:"grid"`
-	//PList *PrintList `json:"prints,omitempty"`
-	//GList *GiftList `json:"gifts,omitempty"`
 	PingBi string
 }
 
@@ -50,27 +40,12 @@ type Robot struct {
 	ID   HexBotID
 	Pos  uint16
 	UUID HexUint64
-
-	//Lock   bool
-	//Active bool `json:"-"`
-
-	//C      uint8
-	//C4     HexByte     `json:",omitempty"`
 	C8     []HexUint16 `json:",omitempty"`
 	Wing   uint8
 	WingLv HexByte //[]byte // 4 byte
 	Sess   uint32
 	Lv     uint8
-	//Exp    uint32
 	Skill  HexUint32
-
-	//Polish uint16
-	//Color  []HexColor16 // 6 color
-	//Coat   []HexUint32  // 3 Coat of Arms
-
-	//Charge uint16 // 0~2000, step = 100
-
-	//cache []byte // for packet
 }
 
 
