@@ -3,6 +3,7 @@ package sdgo
 import (
 	"encoding/json"
 	"io/ioutil"
+	"sync"
 	"time"
 )
 
@@ -89,13 +90,19 @@ var (
 	// map to store ACC to *SDGOUser
 	//initialize with 0
 	ACCMap map[string]*SDGOUser = make(map[string]*SDGOUser,1000)
+	// mutex
+	accMapMutex sync.RWMutex
 )
 
 
 func GetUserInfo(phone string) (bool, *SDGOUser){
+	accMapMutex.RLock()
 	if user, ok := ACCMap[phone]; ok {
+		accMapMutex.RUnlock()
 		return true, user
 	}
+	accMapMutex.RUnlock()
+	
 	//read file
 	data, err := ioutil.ReadFile("acc/" +phone +".json")
 	if err != nil{
@@ -108,7 +115,9 @@ func GetUserInfo(phone string) (bool, *SDGOUser){
 		//fmt.Println(err)
 		return false, nil
 	}
+	accMapMutex.Lock()
 	ACCMap[phone] = &user
+	accMapMutex.Unlock()
 	return true, &user
 }
 
@@ -117,7 +126,9 @@ func init(){
 	go func(){
 		for{
 			//fmt.Println("flush ACCMap")
+			accMapMutex.Lock()
 			ACCMap = make(map[string]*SDGOUser,1000)
+			accMapMutex.Unlock()
 			time.Sleep(10 * time.Minute)
 		}
 	}()
