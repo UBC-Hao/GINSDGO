@@ -70,7 +70,6 @@ type Robot struct {
 
 	//Charge uint16 // 0~2000, step = 100
 
-	//mx    sync.RWMutex // lock for build/read cache
 	//cache []byte // for packet
 }
 
@@ -102,7 +101,7 @@ func GetUserInfo(phone string) (bool, *SDGOUser){
 		return true, user
 	}
 	accMapMutex.RUnlock()
-	
+
 	//read file
 	data, err := ioutil.ReadFile("acc/" +phone +".json")
 	if err != nil{
@@ -125,7 +124,6 @@ func init(){
 	// flush ACCMap every 10 minutes
 	go func(){
 		for{
-			//fmt.Println("flush ACCMap")
 			accMapMutex.Lock()
 			ACCMap = make(map[string]*SDGOUser,1000)
 			accMapMutex.Unlock()
