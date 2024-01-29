@@ -6,6 +6,4 @@ import "ginsdgo/routes"
 
 func main() {
 	routes.InitRouter()
-	
-	//fmt.Println("Hello, World!")
 }

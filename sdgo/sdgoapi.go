@@ -28,7 +28,7 @@ type SDGOUser struct{
 	Tag   int
 	Sess  uint8
 	Slot  uint32
-	Adjutant int   `json:"adjutant,omitempty"`
+	//Adjutant int   `json:"adjutant,omitempty"`
 	//Key      HexByte     `json:"key"`
 	//FList    *FriendList `json:"friend,omitempty"`
 	Grid     *Grid       `json:"grid"`
@@ -84,11 +84,13 @@ func CheckLogin(phone string, username string) bool {
 	}
 	return true
 }
+
 var (
 	// map to store ACC to *SDGOUser
 	//initialize with 0
 	ACCMap map[string]*SDGOUser = make(map[string]*SDGOUser,1000)
 )
+
 
 func GetUserInfo(phone string) (bool, *SDGOUser){
 	if user, ok := ACCMap[phone]; ok {
@@ -103,6 +105,7 @@ func GetUserInfo(phone string) (bool, *SDGOUser){
 	var user SDGOUser
 	err = json.Unmarshal(data, &user)
 	if err != nil {
+		//fmt.Println(err)
 		return false, nil
 	}
 	ACCMap[phone] = &user

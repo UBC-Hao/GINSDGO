@@ -11,6 +11,7 @@ import (
 func InitRouter() {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
+	r.Use(middleware.Cors())
 	_ = r.SetTrustedProxies(nil)
 
 	r.Static("/static", "./static")
@@ -18,12 +19,7 @@ func InitRouter() {
 	auth := r.Group("/api/v1")
 	auth.Use(middleware.JWTAuth())
 	{
-		auth.GET("ping", func(c *gin.Context) {
-			c.JSON(200, gin.H{
-				"message": "pong",
-			})
-			return
-		})
+		auth.GET("info", v1.Info)
 	}
 
 	all := r.Group("/api/v1")
