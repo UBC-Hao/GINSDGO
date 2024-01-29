@@ -19,14 +19,14 @@ type SDGOUser struct{
 	RankL uint8
 	Exp   uint32
 	Hej 	uint32
-	Special int
+	//Special int
 	BP    uint32
 	GP    uint32
-	Item  uint32
-	Shou int
-	PVE int
-	Tag   int
-	Sess  uint8
+	//Item  uint32
+	//Shou int
+	//PVE int
+	//Tag   int
+	//Sess  uint8
 	Slot  uint32
 	//Adjutant int   `json:"adjutant,omitempty"`
 	//Key      HexByte     `json:"key"`
@@ -50,24 +50,24 @@ type Robot struct {
 	Pos  uint16
 	UUID HexUint64
 
-	Lock   bool
-	Active bool `json:"-"`
+	//Lock   bool
+	//Active bool `json:"-"`
 
-	C      uint8
-	C4     HexByte     `json:",omitempty"`
+	//C      uint8
+	//C4     HexByte     `json:",omitempty"`
 	C8     []HexUint16 `json:",omitempty"`
 	Wing   uint8
 	WingLv HexByte //[]byte // 4 byte
 	Sess   uint32
 	Lv     uint8
-	Exp    uint32
+	//Exp    uint32
 	Skill  HexUint32
 
-	Polish uint16
-	Color  []HexColor16 // 6 color
-	Coat   []HexUint32  // 3 Coat of Arms
+	//Polish uint16
+	//Color  []HexColor16 // 6 color
+	//Coat   []HexUint32  // 3 Coat of Arms
 
-	Charge uint16 // 0~2000, step = 100
+	//Charge uint16 // 0~2000, step = 100
 
 	//mx    sync.RWMutex // lock for build/read cache
 	//cache []byte // for packet

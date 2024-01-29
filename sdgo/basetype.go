@@ -26,9 +26,6 @@ func (m *HexByte) UnmarshalJSON(in []byte) error {
 }
 
 type HexUint16 uint16
-func (m HexUint16) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%X"`, m)), nil
-}
 func (m *HexUint16) UnmarshalJSON(in []byte) error {
 	tmp, err :=  strconv.ParseUint(strings.Trim(string(in), `"`), 16, 16)
 	if err != nil {
@@ -39,9 +36,6 @@ func (m *HexUint16) UnmarshalJSON(in []byte) error {
 }
 
 type HexUint32 uint32
-func (m HexUint32) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%X"`, m)), nil
-}
 func (m *HexUint32) UnmarshalJSON(in []byte) error {
 	tmp, err :=  strconv.ParseUint(strings.Trim(string(in), `"`), 16, 32)
 	if err != nil {
