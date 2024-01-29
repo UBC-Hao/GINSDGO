@@ -1,9 +1,11 @@
 package main
 
-import (
-	//"fmt"
-)
+import "ginsdgo/routes"
+
+//"fmt"
 
 func main() {
+	routes.InitRouter()
+	
 	//fmt.Println("Hello, World!")
 }

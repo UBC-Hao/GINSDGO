@@ -13,12 +13,12 @@ func InitRouter() {
 	r := gin.New()
 	_ = r.SetTrustedProxies(nil)
 
-	r.Static("/", "./static")
+	r.Static("/static", "./static")
 	
 	auth := r.Group("/api/v1")
 	auth.Use(middleware.JWTAuth())
 	{
-		auth.GET("/ping", func(c *gin.Context) {
+		auth.GET("ping", func(c *gin.Context) {
 			c.JSON(200, gin.H{
 				"message": "pong",
 			})
@@ -28,6 +28,7 @@ func InitRouter() {
 
 	all := r.Group("/api/v1")
 	{
-		all.POST("/login", v1.Login)
+		all.POST("login", v1.Login)
 	}
+	_ = r.Run(":8080")
 }

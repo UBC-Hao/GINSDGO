@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"ginsdgo/utils"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
@@ -42,7 +43,13 @@ func (j *JWT) ParseToken(tokenString string) (*MyClaims, error) {
 
 func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		token := c.Request.Header.Get("token")
+		token_raw := c.Request.Header.Get("Authorization")
+		// split token
+		token_arr := strings.Split(token_raw, " ")
+		token := ""
+		if len(token_arr) == 2 {
+			token = token_arr[1]
+		}
 		if token == "" {
 			c.JSON(401, gin.H{
 				"status": utils.TOKEN_ERROR,
