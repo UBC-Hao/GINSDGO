@@ -65,12 +65,6 @@ func (m *HexUint64) UnmarshalJSON(in []byte) error {
 }
 
 type HexColor16 uint16
-func (m HexColor16) MarshalJSON() ([]byte, error) {
-	out := uint32((m & 0x1F) << 3) // B
-	out |= uint32(((m >> 5) & 0x1F) << 3) << 8 // G
-	out |= uint32(((m >> 10) & 0x1F) << 3) << 16 // R
-	return []byte(fmt.Sprintf(`"%06X"`, out)), nil
-}
 func (m *HexColor16) UnmarshalJSON(in []byte) error {
 	return m.ParseColor(strings.Trim(string(in), `"`), uint16(*m))
 }
@@ -95,10 +89,6 @@ func (m HexColor16) DumpColor() (out uint32) {
 
 // for print order
 type HexBotID uint16
-func (m HexBotID) MarshalJSON() ([]byte, error) {
-	id := uint16((m >> 8) | ((m & 0xFF) << 8))
-	return []byte(fmt.Sprintf(`"%04X"`, id)), nil
-}
 func (m *HexBotID) UnmarshalJSON(in []byte) error {
 	tmp, err := hex.DecodeString(strings.Trim(string(in), `"`))
 	if len(tmp) == 2 && err == nil {
