@@ -39,6 +39,7 @@ func setToken(c *gin.Context, user model.User) {
 	j := middleware.NewJWT()
 	claims := middleware.MyClaims{
 		Phone: user.Phone,
+		Name: user.Username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: jwt.TimeFunc().Add(10 * time.Hour).Unix(),
 			Issuer:    "GinSDGO",

@@ -20,6 +20,7 @@ func InitRouter() {
 	auth.Use(middleware.JWTAuth())
 	{
 		auth.GET("info", v1.Info)
+		auth.GET("matches",v1.Matches)
 	}
 
 	all := r.Group("/api/v1")

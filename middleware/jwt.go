@@ -20,6 +20,7 @@ func NewJWT() *JWT {
 
 type MyClaims struct {
 	Phone string `json:"phone"`
+	Name string `json:"name"`
 	jwt.StandardClaims
 }
 
@@ -69,6 +70,7 @@ func JWTAuth() gin.HandlerFunc {
 			return
 		}
 		c.Set("phone", claims.Phone)
+		c.Set("name",claims.Name)
 		c.Next()
 	}
 }
